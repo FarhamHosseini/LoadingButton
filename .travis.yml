@@ -1,0 +1,29 @@
+sudo: required
+language: java
+jdk: oraclejdk8
+dist: trusty
+os:
+  - linux
+git:
+  depth: false
+  submodules: false
+
+before_install:
+  - "chmod +x ./Android/gradlew"
+
+script:
+  - yes | ./Android/gradlew tasks --scan
+  - yes | ./Android/gradlew tasks --all
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t 9166c3b5-d71b-4714-95aa-3fd6811d59dc
