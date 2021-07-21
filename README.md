@@ -13,7 +13,6 @@ Android Button that morphs into a loading progress bar.
 	 - [Show done animation](#show-done-animation)
 	 - [Revert the loading animation with different text or image](#revert-the-loading-animation-with-different-text-or-image)
  - [Configure XML](#configure-xml)
- - [Avoid Memory Leaks](#avoid-memory-leaks)
  - [Bugs and feedback](#bugs-and-feedback)
  - [Credits](#credits)
 
@@ -178,19 +177,6 @@ This library only works with selector as the background, but not with shape as t
 ### Manifest merge
 
 This library only supports androidx since prior the version 2.0.0. So don't try to use it with the old Support Library. Use androidx instead.
-
-### Avoid Memory Leaks
-Prior to version 2.1.0, to avoid memory leaks is your code, you must dispose the buttons in the onDestroy method. Example:
-
-```java
-override fun onDestroy() {
-        super.onDestroy()
-	progressButton.dispose()
-}
-```
-
-In version 2.1.0, `ProgressButton` was updated to be a `LifecycleObserver` and will automatically
-call `dispose()` when an `onDestroy()` event is observed by the lifecycle owner.
 
 ## Bugs and Feedback
 
